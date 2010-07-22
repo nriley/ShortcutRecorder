@@ -28,6 +28,8 @@
 	{
         [self setCellClass: [SRRecorderCell class]];
     }
+
+	[self exposeBinding:@"shortcut"];
 }
 
 + (Class)cellClass
@@ -234,6 +236,60 @@
 - (void)setKeyCombo:(KeyCombo)aKeyCombo
 {
 	[SRCell setKeyCombo: aKeyCombo];
+}
+
+#pragma mark *** Binding Methods ***
+
+- (NSArray *)shortcut
+{
+	KeyCombo keyCombo = [self keyCombo];
+	return [NSArray arrayWithObjects:
+			[NSNumber numberWithInteger:keyCombo.code],
+			[NSNumber numberWithUnsignedInteger:keyCombo.flags],
+			nil];
+}
+
+- (void)setShortcut:(NSArray *)shortcut
+{
+	KeyCombo keyCombo = {-1, 0};
+	if(shortcut.count != 2) {
+		return;
+	}
+	NSNumber *code = [shortcut objectAtIndex:0];
+	NSNumber *flags = [shortcut objectAtIndex:1];
+	if(![code isKindOfClass:[NSNumber class]] || ![flags isKindOfClass:[NSNumber class]]) {
+		return;
+	}
+	keyCombo.code = [code integerValue];
+	keyCombo.flags = [flags unsignedIntegerValue];
+	[self setKeyCombo:keyCombo];
+}
+
+- (Class)valueClassForBinding:(NSString *)binding
+{
+	if([binding isEqualToString:@"shortcut"]) {
+		return [NSArray class];
+	}
+	return [super valueClassForBinding:binding];
+}
+
+- (void)didChangeValueForKey:(NSString *)key
+{
+	[super didChangeValueForKey:key];
+	if([key isEqualToString:@"shortcut"]) {
+		NSDictionary *info = [self infoForBinding:key];
+		id observedObject = [info objectForKey:NSObservedObjectKey];
+		NSString *observedKeyPath = [info objectForKey:NSObservedKeyPathKey];
+		if (observedObject && observedKeyPath) {
+			id value = [self shortcut];
+			NSString *transformerName = [[info objectForKey:NSOptionsKey] objectForKey:NSValueTransformerNameBindingOption];
+			if (transformerName && [transformerName isEqual:[NSNull null]] == NO) {
+				NSValueTransformer *valueTransformer = [NSValueTransformer valueTransformerForName:transformerName];
+				value = [valueTransformer reverseTransformedValue:value]; 
+			}
+			[observedObject setValue:value forKeyPath:observedKeyPath];
+		}
+	}
 }
 
 #pragma mark *** Autosave Control ***

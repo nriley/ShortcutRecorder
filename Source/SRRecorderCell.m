@@ -1204,6 +1204,9 @@
 		
 		[values setValue:defaultsValue forKey:[self _defaultsKeyForAutosaveName: defaultsKey]];
 	}
+
+	// Binding info
+	[[self controlView] didChangeValueForKey:@"shortcut"];
 }
 
 - (void)_loadKeyCombo

@@ -67,8 +67,8 @@
 
 #pragma mark *** Binding Methods ***
 
-- (NSArray *)shortcut;
-- (void)setShortcut:(NSArray *)shortcut;
+- (NSDictionary *)objectValue;
+- (void)setObjectValue:(NSDictionary *)shortcut;
 
 @end
 

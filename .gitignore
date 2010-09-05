@@ -1,0 +1,7 @@
+build
+.DS_Store
+*.pbxuser
+*.mode?v3
+*~
+*~.nib
+#*

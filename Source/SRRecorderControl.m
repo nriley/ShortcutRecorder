@@ -268,7 +268,7 @@
 
 - (Class)valueClassForBinding:(NSString *)binding
 {
-	if ([binding isEqualToString:@"value"])
+	if ([binding isEqualToString:NSValueBinding])
 		return [NSDictionary class];
 
 	return [super valueClassForBinding:binding];
@@ -336,7 +336,7 @@
 		[delegate shortcutRecorder:self keyComboDidChange:newKeyCombo];
 
     // propagate view changes to binding (see http://www.tomdalling.com/cocoa/implementing-your-own-cocoa-bindings)
-    NSDictionary *bindingInfo = [self infoForBinding:@"value"];
+    NSDictionary *bindingInfo = [self infoForBinding:NSValueBinding];
 	if (!bindingInfo)
 		return;
 

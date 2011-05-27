@@ -579,6 +579,7 @@
 			isa = PBXProject;
 			buildConfigurationList = C01FCF4E08A954540054247B /* Build configuration list for PBXProject "ShortcutRecorder" */;
 			compatibilityVersion = "Xcode 3.1";
+			developmentRegion = English;
 			hasScannedForEncodings = 1;
 			knownRegions = (
 				English,
@@ -1133,7 +1134,10 @@
 		C01FCF5008A954540054247B /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ARCHS = "$(ARCHS_STANDARD_32_64_BIT)";
+				ARCHS = (
+					ppc7400,
+					"$(ARCHS_STANDARD_32_64_BIT)",
+				);
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_VERSION = 4.2;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;

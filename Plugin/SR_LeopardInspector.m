@@ -57,7 +57,7 @@
 				break;
 		}
 	}
-	NSLog(@"mask is: %ld", mask);
+	NSLog(@"mask is: %u", mask);
 	return mask;
 }
 

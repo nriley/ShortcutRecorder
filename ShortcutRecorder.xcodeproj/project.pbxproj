@@ -894,8 +894,6 @@
 				DYLIB_CURRENT_VERSION = 1;
 				FRAMEWORK_VERSION = A;
 				GCC_DYNAMIC_NO_PIC = NO;
-				GCC_ENABLE_OBJC_GC = supported;
-				GCC_MODEL_TUNING = G5;
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "$(SYSTEM_LIBRARY_DIR)/Frameworks/AppKit.framework/Headers/AppKit.h";
@@ -908,7 +906,6 @@
 					AppKit,
 				);
 				PRODUCT_NAME = ShortcutRecorder;
-				ZERO_LINK = YES;
 			};
 			name = Debug;
 		};
@@ -920,8 +917,6 @@
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				FRAMEWORK_VERSION = A;
-				GCC_ENABLE_OBJC_GC = supported;
-				GCC_MODEL_TUNING = G5;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "$(SYSTEM_LIBRARY_DIR)/Frameworks/AppKit.framework/Headers/AppKit.h";
 				INFOPLIST_FILE = "Framework/SR_LeopardFrameworkEmbed-Info.plist";
@@ -933,7 +928,6 @@
 					AppKit,
 				);
 				PRODUCT_NAME = ShortcutRecorder;
-				ZERO_LINK = NO;
 			};
 			name = Release;
 		};
@@ -1107,8 +1101,9 @@
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.6;
 				RUN_CLANG_STATIC_ANALYZER = YES;
-				SDKROOT = macosx10.6;
+				SDKROOT = "";
 				WARNING_CFLAGS = "-Wall";
 				WARNING_LDFLAGS = "";
 			};
@@ -1122,8 +1117,9 @@
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.6;
 				RUN_CLANG_STATIC_ANALYZER = YES;
-				SDKROOT = macosx10.6;
+				SDKROOT = "";
 				WARNING_CFLAGS = "-Wall";
 				WARNING_LDFLAGS = "";
 			};

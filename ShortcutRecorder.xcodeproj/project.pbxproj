@@ -838,8 +838,6 @@
 				);
 				FRAMEWORK_SEARCH_PATHS_QUOTED_FOR_TARGET_1 = "\"$(DEVELOPER_FRAMEWORKS_DIR)\"";
 				GCC_DYNAMIC_NO_PIC = NO;
-				GCC_ENABLE_OBJC_GC = supported;
-				GCC_MODEL_TUNING = G5;
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = Plugin/SR_Leopard_Prefix.pch;
@@ -853,7 +851,6 @@
 				);
 				PRODUCT_NAME = ShortcutRecorder;
 				WRAPPER_EXTENSION = ibplugin;
-				ZERO_LINK = YES;
 			};
 			name = Debug;
 		};
@@ -868,8 +865,6 @@
 					"$(FRAMEWORK_SEARCH_PATHS_QUOTED_FOR_TARGET_1)",
 				);
 				FRAMEWORK_SEARCH_PATHS_QUOTED_FOR_TARGET_1 = "\"$(DEVELOPER_FRAMEWORKS_DIR)\"";
-				GCC_ENABLE_OBJC_GC = supported;
-				GCC_MODEL_TUNING = G5;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = Plugin/SR_Leopard_Prefix.pch;
 				INFOPLIST_FILE = "Plugin/SR_PluginStandalone-Info.plist";
@@ -882,7 +877,6 @@
 				);
 				PRODUCT_NAME = ShortcutRecorder;
 				WRAPPER_EXTENSION = ibplugin;
-				ZERO_LINK = NO;
 			};
 			name = Release;
 		};
@@ -947,7 +941,6 @@
 				COPY_PHASE_STRIP = YES;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				PRODUCT_NAME = "Build ShortcutRecorder.framework";
-				ZERO_LINK = NO;
 			};
 			name = Release;
 		};
@@ -959,8 +952,6 @@
 				DYLIB_CURRENT_VERSION = 1;
 				FRAMEWORK_VERSION = A;
 				GCC_DYNAMIC_NO_PIC = NO;
-				GCC_ENABLE_OBJC_GC = supported;
-				GCC_MODEL_TUNING = G5;
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "$(SYSTEM_LIBRARY_DIR)/Frameworks/AppKit.framework/Headers/AppKit.h";
@@ -973,7 +964,6 @@
 					AppKit,
 				);
 				PRODUCT_NAME = ShortcutRecorder;
-				ZERO_LINK = YES;
 			};
 			name = Debug;
 		};
@@ -985,8 +975,6 @@
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				FRAMEWORK_VERSION = A;
-				GCC_ENABLE_OBJC_GC = supported;
-				GCC_MODEL_TUNING = G5;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "$(SYSTEM_LIBRARY_DIR)/Frameworks/AppKit.framework/Headers/AppKit.h";
 				INFOPLIST_FILE = "Framework/SR_LeopardFramework-Info.plist";
@@ -998,7 +986,6 @@
 					AppKit,
 				);
 				PRODUCT_NAME = ShortcutRecorder;
-				ZERO_LINK = NO;
 			};
 			name = Release;
 		};
@@ -1014,8 +1001,6 @@
 				);
 				FRAMEWORK_SEARCH_PATHS_QUOTED_FOR_TARGET_1 = "\"$(DEVELOPER_FRAMEWORKS_DIR)\"";
 				GCC_DYNAMIC_NO_PIC = NO;
-				GCC_ENABLE_OBJC_GC = supported;
-				GCC_MODEL_TUNING = G5;
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = Plugin/SR_Leopard_Prefix.pch;
@@ -1029,7 +1014,6 @@
 				);
 				PRODUCT_NAME = ShortcutRecorder;
 				WRAPPER_EXTENSION = ibplugin;
-				ZERO_LINK = YES;
 			};
 			name = Debug;
 		};
@@ -1044,8 +1028,6 @@
 					"$(FRAMEWORK_SEARCH_PATHS_QUOTED_FOR_TARGET_1)",
 				);
 				FRAMEWORK_SEARCH_PATHS_QUOTED_FOR_TARGET_1 = "\"$(DEVELOPER_FRAMEWORKS_DIR)\"";
-				GCC_ENABLE_OBJC_GC = supported;
-				GCC_MODEL_TUNING = G5;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = Plugin/SR_Leopard_Prefix.pch;
 				INFOPLIST_FILE = Plugin/Info.plist;
@@ -1058,7 +1040,6 @@
 				);
 				PRODUCT_NAME = ShortcutRecorder;
 				WRAPPER_EXTENSION = ibplugin;
-				ZERO_LINK = NO;
 			};
 			name = Release;
 		};
@@ -1067,24 +1048,19 @@
 			buildSettings = {
 				COPY_PHASE_STRIP = NO;
 				GCC_DYNAMIC_NO_PIC = NO;
-				GCC_ENABLE_OBJC_GC = supported;
-				GCC_MODEL_TUNING = G5;
 				GCC_OPTIMIZATION_LEVEL = 0;
 				IBC_PLUGINS = $BUILT_PRODUCTS_DIR/ShortcutRecorder.Framework/Versions/A/Resources/ShortcutRecorder.ibplugin;
 				INFOPLIST_FILE = Demo/Info.plist;
 				INSTALL_PATH = "$(HOME)/Applications";
 				PRODUCT_NAME = ShortcutRecorder;
 				WRAPPER_EXTENSION = app;
-				ZERO_LINK = YES;
 			};
 			name = Debug;
 		};
 		93983B210DA43C4E007F53F3 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				GCC_ENABLE_OBJC_GC = supported;
 				GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
-				GCC_MODEL_TUNING = G5;
 				IBC_PLUGINS = $BUILT_PRODUCTS_DIR/ShortcutRecorder.Framework/Versions/A/Resources/ShortcutRecorder.ibplugin;
 				INFOPLIST_FILE = Demo/Info.plist;
 				INSTALL_PATH = "$(HOME)/Applications";

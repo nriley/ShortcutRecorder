@@ -214,6 +214,17 @@
 	}
 }
 
+- (NSRect)focusRingMaskBoundsForFrame:(NSRect)cellFrame inView:(NSView *)controlView
+{
+    return cellFrame;
+}
+
+- (void)drawFocusRingMaskWithFrame:(NSRect)cellFrame inView:(NSView *)controlView
+{
+    CGFloat radius = NSHeight(cellFrame) / 2.0f;
+    [[NSBezierPath bezierPathWithRoundedRect:cellFrame xRadius:radius yRadius:radius] fill];
+}
+
 - (void)drawWithFrame:(NSRect)cellFrame inView:(NSView *)controlView
 {
 	CGFloat radius = 0;
@@ -341,16 +352,6 @@
 		
 	// Finally draw it
 		[displayString drawInRect:textRect withAttributes:attributes];
-		
-    // draw a focus ring...?
-		if ( [self showsFirstResponder] )
-		{
-			[NSGraphicsContext saveGraphicsState];
-			NSSetFocusRingStyle(NSFocusRingOnly);
-			radius = NSHeight(cellFrame) / 2.0f;
-			[[NSBezierPath bezierPathWithRoundedRect:cellFrame xRadius:radius yRadius:radius] fill];
-			[NSGraphicsContext restoreGraphicsState];
-		}
 		
 	} else {
 		
@@ -576,17 +577,6 @@
 		}
 		
 		[[NSGraphicsContext currentContext] restoreGraphicsState];
-		
-    // draw a focus ring...?
-		
-		if ( [self showsFirstResponder] )
-		{
-			[NSGraphicsContext saveGraphicsState];
-			NSSetFocusRingStyle(NSFocusRingOnly);
-			radius = NSHeight(cellFrame) / 2.0f;
-			[[NSBezierPath bezierPathWithRoundedRect:cellFrame xRadius:radius yRadius:radius] fill];
-			[NSGraphicsContext restoreGraphicsState];
-		}
 		
 	}
 }

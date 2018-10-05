@@ -254,12 +254,10 @@ static NSMutableDictionary *SRSharedImageCache = nil;
 + (NSValue *)_sizeSRSnapback;
 + (void)_drawSRRemoveShortcut:(id)anNSCustomImageRep;
 + (NSValue *)_sizeSRRemoveShortcut;
-+ (void)_drawSRRemoveShortcutRollover:(id)anNSCustomImageRep;
-+ (NSValue *)_sizeSRRemoveShortcutRollover;
 + (void)_drawSRRemoveShortcutPressed:(id)anNSCustomImageRep;
 + (NSValue *)_sizeSRRemoveShortcutPressed;
 
-+ (void)_drawARemoveShortcutBoxUsingRep:(id)anNSCustomImageRep opacity:(CGFloat)opacity;
++ (void)_drawARemoveShortcutBoxUsingRep:(id)anNSCustomImageRep color:(NSColor *)color;
 @end
 
 @implementation SRSharedImageProvider
@@ -328,7 +326,7 @@ static NSMutableDictionary *SRSharedImageCache = nil;
 	
 	NSCustomImageRep *rep = anNSCustomImageRep;
 	NSSize size = [rep size];
-	[[NSColor whiteColor] setFill];
+	[[NSColor textBackgroundColor] setFill];
 	CGFloat hScale = (size.width/1.0f);
 	CGFloat vScale = (size.height/1.0f);
 	
@@ -367,21 +365,18 @@ static NSMutableDictionary *SRSharedImageCache = nil;
 + (NSValue *)_sizeSRRemoveShortcut {
 	return [NSValue valueWithSize:NSMakeSize(14.0f,14.0f)];
 }
-+ (NSValue *)_sizeSRRemoveShortcutRollover { return [self _sizeSRRemoveShortcut]; }
 + (NSValue *)_sizeSRRemoveShortcutPressed { return [self _sizeSRRemoveShortcut]; }
-+ (void)_drawARemoveShortcutBoxUsingRep:(id)anNSCustomImageRep opacity:(CGFloat)opacity {
-	
-//	NSLog(@"drawARemoveShortcutBoxUsingRep: %@ opacity: %f", anNSCustomImageRep, opacity);
-	
++ (void)_drawARemoveShortcutBoxUsingRep:(id)anNSCustomImageRep color:(NSColor *)color {
+
 	NSCustomImageRep *rep = anNSCustomImageRep;
 	NSSize size = [rep size];
-	[[NSColor colorWithCalibratedWhite:0.0f alpha:1.0f-opacity] setFill];
+    [color setFill];
 	CGFloat hScale = (size.width/14.0f);
 	CGFloat vScale = (size.height/14.0f);
 	
 	[[NSBezierPath bezierPathWithOvalInRect:NSMakeRect(0.0f,0.0f,size.width,size.height)] fill];
 	
-	[[NSColor whiteColor] setStroke];
+	[[NSColor textBackgroundColor] setStroke];
 	
 	NSBezierPath *cross = [[NSBezierPath alloc] init];
 	[cross setLineWidth:hScale*1.2f];
@@ -398,18 +393,12 @@ static NSMutableDictionary *SRSharedImageCache = nil;
 	
 //	NSLog(@"drawSRRemoveShortcut using: %@", anNSCustomImageRep);
 	
-	[self _drawARemoveShortcutBoxUsingRep:anNSCustomImageRep opacity:0.75f];
-}
-+ (void)_drawSRRemoveShortcutRollover:(id)anNSCustomImageRep {
-	
-//	NSLog(@"drawSRRemoveShortcutRollover using: %@", anNSCustomImageRep);
-	
-	[self _drawARemoveShortcutBoxUsingRep:anNSCustomImageRep opacity:0.65f];	
+    [self _drawARemoveShortcutBoxUsingRep:anNSCustomImageRep color:[NSColor secondaryLabelColor]];
 }
 + (void)_drawSRRemoveShortcutPressed:(id)anNSCustomImageRep {
 	
 //	NSLog(@"drawSRRemoveShortcutPressed using: %@", anNSCustomImageRep);
 	
-	[self _drawARemoveShortcutBoxUsingRep:anNSCustomImageRep opacity:0.55f];
+    [self _drawARemoveShortcutBoxUsingRep:anNSCustomImageRep color:[NSColor windowFrameTextColor]];
 }
 @end

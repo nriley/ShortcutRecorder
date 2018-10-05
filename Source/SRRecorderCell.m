@@ -231,7 +231,7 @@
 
 	if (style == SRGradientBorderStyle) {
 		
-		NSRect whiteRect = cellFrame;
+		NSRect backgroundRect = cellFrame;
 		NSBezierPath *roundedRect;
 		
 	// Draw gradient when in recording mode
@@ -258,17 +258,17 @@
 			[snapBackArrow drawAtPoint:[self _snapbackRectForFrame: cellFrame].origin fromRect:NSZeroRect operation:NSCompositeSourceOver fraction:1.0f];
 			
 		// Because of the gradient and snapback image, the white rounded rect will be smaller
-			whiteRect = NSInsetRect(cellFrame, 9.5f, 2.0f);
-			whiteRect.origin.x -= 7.5f;
+			backgroundRect = NSInsetRect(cellFrame, 9.5f, 2.0f);
+			backgroundRect.origin.x -= 7.5f;
 		}
 		
-	// Draw white rounded box
-		radius = NSHeight(whiteRect) / 2.0f;
-		roundedRect = [NSBezierPath bezierPathWithRoundedRect:whiteRect xRadius:radius yRadius:radius];
+	// Draw rounded box
+		radius = NSHeight(backgroundRect) / 2.0f;
+		roundedRect = [NSBezierPath bezierPathWithRoundedRect:backgroundRect xRadius:radius yRadius:radius];
 		[[NSGraphicsContext currentContext] saveGraphicsState];
 		[roundedRect addClip];
-		[[NSColor whiteColor] set];
-		[NSBezierPath fillRect: whiteRect];
+		[[NSColor textBackgroundColor] set];
+		[NSBezierPath fillRect: backgroundRect];
 		
 	// Draw border and remove badge if needed
 		if (!isRecording)
@@ -279,7 +279,7 @@
 		// If key combination is set and valid, draw remove image
 			if (![self _isEmpty] && [self isEnabled])
 			{
-				NSString *removeImageName = [NSString stringWithFormat: @"SRRemoveShortcut%@", (mouseInsideTrackingArea ? (mouseDown ? @"Pressed" : @"Rollover") : (mouseDown ? @"Rollover" : @""))];
+				NSString *removeImageName = [NSString stringWithFormat: @"SRRemoveShortcut%@", (mouseInsideTrackingArea && mouseDown) ? @"Pressed" : @""];
 				NSImage *removeImage = SRResIndImage(removeImageName);
 				[removeImage drawAtPoint:[self _removeButtonRectForFrame: cellFrame].origin fromRect:NSZeroRect operation:NSCompositeSourceOver fraction:1.0f];
 			}
@@ -296,7 +296,7 @@
 		BOOL recordingOrEmpty = (isRecording || [self _isEmpty]);
 		NSDictionary *attributes = [NSDictionary dictionaryWithObjectsAndKeys: mpstyle, NSParagraphStyleAttributeName,
 			[NSFont systemFontOfSize: (recordingOrEmpty ? [NSFont labelFontSize] : [NSFont smallSystemFontSize])], NSFontAttributeName,
-			(recordingOrEmpty ? [NSColor disabledControlTextColor] : [NSColor blackColor]), NSForegroundColorAttributeName, 
+			(recordingOrEmpty ? [NSColor disabledControlTextColor] : [NSColor controlTextColor]), NSForegroundColorAttributeName, 
 			nil];
 		
 		NSString *displayString;
@@ -358,7 +358,7 @@
 //	NSRect rawCellFrame = cellFrame;
 		cellFrame = NSInsetRect(cellFrame,0.5f,0.5f);
 		
-		NSRect whiteRect = cellFrame;
+		NSRect backgroundRect = cellFrame;
 		NSBezierPath *roundedRect;
 		
 		BOOL isVaguelyRecording = isRecording;
@@ -405,10 +405,10 @@
 		}
 		
 		
-	// Draw white rounded box
-		radius = NSHeight(whiteRect) / 2.0f;
-		roundedRect = [NSBezierPath bezierPathWithRoundedRect:whiteRect xRadius:radius yRadius:radius];
-		[[NSColor whiteColor] set];
+	// Draw rounded box
+		radius = NSHeight(backgroundRect) / 2.0f;
+		roundedRect = [NSBezierPath bezierPathWithRoundedRect:backgroundRect xRadius:radius yRadius:radius];
+		[[NSColor textBackgroundColor] set];
 		[[NSGraphicsContext currentContext] saveGraphicsState];
 		[roundedRect fill];
 		[[NSColor windowFrameColor] set];
@@ -423,7 +423,7 @@
 			
 			NSRect correctedSnapBackRect = snapBackRect;
 //		correctedSnapBackRect.origin.y = NSMinY(whiteRect);
-			correctedSnapBackRect.size.height = NSHeight(whiteRect);
+			correctedSnapBackRect.size.height = NSHeight(backgroundRect);
 			correctedSnapBackRect.size.width *= 1.3f;
 			correctedSnapBackRect.origin.y -= 5.0f;
 			correctedSnapBackRect.origin.x -= 1.5f;
@@ -470,7 +470,7 @@
 		// If key combination is set and valid, draw remove image
 		if (![self _isEmpty] && [self isEnabled])
 		{
-			NSString *removeImageName = [NSString stringWithFormat: @"SRRemoveShortcut%@", (mouseInsideTrackingArea ? (mouseDown ? @"Pressed" : @"Rollover") : (mouseDown ? @"Rollover" : @""))];
+			NSString *removeImageName = [NSString stringWithFormat: @"SRRemoveShortcut%@", (mouseInsideTrackingArea && mouseDown) ? @"Pressed" : @""];
 			NSImage *removeImage = SRResIndImage(removeImageName);
 			[removeImage drawAtPoint:[viewportMovement transformPoint:([self _removeButtonRectForFrame: cellFrame].origin)] fromRect:NSZeroRect operation:NSCompositeSourceOver fraction:alphaView];
 			//NSLog(@"drew removeImage with alpha %f", alphaView);
@@ -499,7 +499,7 @@
 			BOOL recordingOrEmpty = (isVaguelyRecording || [self _isEmpty]);
 			NSDictionary *attributes = [NSDictionary dictionaryWithObjectsAndKeys: mpstyle, NSParagraphStyleAttributeName,
 				[NSFont systemFontOfSize: (recordingOrEmpty ? [NSFont labelFontSize] : [NSFont smallSystemFontSize])], NSFontAttributeName,
-				[(recordingOrEmpty ? [NSColor disabledControlTextColor] : [NSColor blackColor]) colorWithAlphaComponent:alphaRecordingText], NSForegroundColorAttributeName, 
+				[(recordingOrEmpty ? [NSColor disabledControlTextColor] : [NSColor controlTextColor]) colorWithAlphaComponent:alphaRecordingText], NSForegroundColorAttributeName,
 				nil];
 		// Recording, but no modifier keys down
 			if (![self _validModifierFlags: recordingFlags])
@@ -544,7 +544,7 @@
 	// Only the KeyCombo should be black and in a bigger font size
 			NSDictionary *attributes = [NSDictionary dictionaryWithObjectsAndKeys: mpstyle, NSParagraphStyleAttributeName,
 				[NSFont systemFontOfSize: ([self _isEmpty] ? [NSFont labelFontSize] : [NSFont smallSystemFontSize])], NSFontAttributeName,
-				[([self _isEmpty] ? [NSColor disabledControlTextColor] : [NSColor blackColor]) colorWithAlphaComponent:alphaCombo], NSForegroundColorAttributeName, 
+				[([self _isEmpty] ? [NSColor disabledControlTextColor] : [NSColor controlTextColor]) colorWithAlphaComponent:alphaCombo], NSForegroundColorAttributeName,
 				nil];
 		// Not recording...
 			if ([self _isEmpty])
